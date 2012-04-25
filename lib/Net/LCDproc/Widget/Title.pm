@@ -1,6 +1,6 @@
 package Net::LCDproc::Widget::Title;
 {
-    $Net::LCDproc::Widget::Title::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::Title::VERSION = '0.1.1';
 }
 
 #ABSTRACT: 'title' widget
@@ -15,14 +15,7 @@ has text => (
     is       => 'rw',
     isa      => 'Str',
     required => 1,
-    lazy     => 1,
-    default  => q{},
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
-
-has '+type' => (default => 'title',);
 
 has '+_set_cmd' => (default => sub { [qw/ text /] },);
 
@@ -40,7 +33,7 @@ Net::LCDproc::Widget::Title - 'title' widget
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

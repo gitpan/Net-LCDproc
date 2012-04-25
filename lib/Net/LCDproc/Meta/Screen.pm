@@ -1,6 +1,6 @@
-package Net::LCDproc::Meta::Attribute::LCDproc::Screen;
+package Net::LCDproc::Meta::Screen;
 {
-    $Net::LCDproc::Meta::Attribute::LCDproc::Screen::VERSION = '0.1.0';
+    $Net::LCDproc::Meta::Screen::VERSION = '0.1.1';
 }
 
 use v5.10;
@@ -25,9 +25,9 @@ has cmd_str => (
 
 package Moose::Meta::Attribute::Custom::Trait::LCDprocScreen;
 {
-    $Moose::Meta::Attribute::Custom::Trait::LCDprocScreen::VERSION = '0.1.0';
+    $Moose::Meta::Attribute::Custom::Trait::LCDprocScreen::VERSION = '0.1.1';
 }
-sub register_implementation {'Net::LCDproc::Meta::Attribute::LCDproc::Screen'}
+sub register_implementation {'Net::LCDproc::Meta::Screen'}
 
 1;
 
@@ -37,11 +37,11 @@ __END__
 
 =head1 NAME
 
-Net::LCDproc::Meta::Attribute::LCDproc::Screen
+Net::LCDproc::Meta::Screen
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

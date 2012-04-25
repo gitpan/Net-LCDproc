@@ -1,9 +1,9 @@
 package Net::LCDproc::Widget::String;
 {
-    $Net::LCDproc::Widget::String::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::String::VERSION = '0.1.1';
 }
 
-#ABSTRACT: 'string' widget
+#ABSTRACT: show regular strings
 
 use v5.10;
 use Moose;
@@ -15,23 +15,13 @@ has text => (
     is       => 'rw',
     isa      => 'Str',
     required => 1,
-    default  => q{},
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
 
 has ['x', 'y'] => (
     is       => 'rw',
     isa      => 'Int',
     required => 1,
-    default  => 1,
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
-
-has '+type' => (default => 'string',);
 
 has '+_set_cmd' => (default => sub { [qw/ x y text /] },);
 
@@ -45,11 +35,11 @@ __END__
 
 =head1 NAME
 
-Net::LCDproc::Widget::String - 'string' widget
+Net::LCDproc::Widget::String - show regular strings
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

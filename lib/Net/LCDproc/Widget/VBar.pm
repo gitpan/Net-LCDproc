@@ -1,9 +1,9 @@
 package Net::LCDproc::Widget::VBar;
 {
-    $Net::LCDproc::Widget::VBar::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::VBar::VERSION = '0.1.1';
 }
 
-#ABSTRACT: 'vbar' widget
+#ABSTRACT: draw a vertical bar
 
 use v5.10;
 use Moose;
@@ -15,13 +15,7 @@ has ['x', 'y', 'length'] => (
     is       => 'rw',
     isa      => 'Int',
     required => 1,
-    default  => 0,
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
-
-has '+type' => (default => 'vbar',);
 
 has '+_set_cmd' => (default => sub { [qw/ x y length /] },);
 
@@ -35,11 +29,11 @@ __END__
 
 =head1 NAME
 
-Net::LCDproc::Widget::VBar - 'vbar' widget
+Net::LCDproc::Widget::VBar - draw a vertical bar
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

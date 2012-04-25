@@ -1,9 +1,9 @@
 package Net::LCDproc::Widget::HBar;
 {
-    $Net::LCDproc::Widget::HBar::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::HBar::VERSION = '0.1.1';
 }
 
-#ABSTRACT: 'hbar' widget
+#ABSTRACT: draw a horizontal bar
 
 use v5.10;
 use Moose;
@@ -15,13 +15,7 @@ has ['x', 'y', 'length'] => (
     is       => 'rw',
     isa      => 'Int',
     required => 1,
-    default  => 0,
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
-
-has '+type' => (default => 'hbar',);
 
 has '+_set_cmd' => (default => sub { [qw/ x y length /] },);
 
@@ -35,11 +29,11 @@ __END__
 
 =head1 NAME
 
-Net::LCDproc::Widget::HBar - 'hbar' widget
+Net::LCDproc::Widget::HBar - draw a horizontal bar
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

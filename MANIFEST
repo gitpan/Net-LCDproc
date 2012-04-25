@@ -21,7 +21,8 @@ eg/errors.pl
 eg/music.pl
 lib/Net/LCDproc.pm
 lib/Net/LCDproc/Error.pm
-lib/Net/LCDproc/Meta/Attribute/LCDproc/Screen.pm
+lib/Net/LCDproc/Meta/Screen.pm
+lib/Net/LCDproc/Meta/Widget.pm
 lib/Net/LCDproc/Screen.pm
 lib/Net/LCDproc/Widget.pm
 lib/Net/LCDproc/Widget/Frame.pm

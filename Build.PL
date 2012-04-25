@@ -22,7 +22,7 @@ my %module_build_args = (
     "Ioan Rogers <ioanr\@cpan.org>"
   ],
   "dist_name" => "Net-LCDproc",
-  "dist_version" => "0.1.0",
+  "dist_version" => "0.1.1",
   "license" => "gpl",
   "module_name" => "Net::LCDproc",
   "recommends" => {},
@@ -32,6 +32,7 @@ my %module_build_args = (
     "IO::Socket::INET" => 0,
     "Log::Any" => 0,
     "Moose" => 0,
+    "Moose::Exporter" => 0,
     "Moose::Role" => 0,
     "Moose::Util::TypeConstraints" => 0,
     "Readonly" => 0,

@@ -1,6 +1,6 @@
 package Net::LCDproc::Error;
 {
-    $Net::LCDproc::Error::VERSION = '0.1.0';
+    $Net::LCDproc::Error::VERSION = '0.1.1';
 }
 
 #ABSTRACT: Error class
@@ -62,7 +62,7 @@ Net::LCDproc::Error - Error class
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SYNOPSIS
 

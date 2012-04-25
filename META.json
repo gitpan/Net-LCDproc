@@ -4,7 +4,7 @@
       "Ioan Rogers <ioanr@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300014, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "gpl_3"
    ],
@@ -30,6 +30,7 @@
             "IO::Socket::INET" : "0",
             "Log::Any" : "0",
             "Moose" : "0",
+            "Moose::Exporter" : "0",
             "Moose::Role" : "0",
             "Moose::Util::TypeConstraints" : "0",
             "Readonly" : "0",
@@ -59,6 +60,6 @@
          "web" : "https://github.com/ioanrogers/Net-LCDproc"
       }
    },
-   "version" : "0.1.0"
+   "version" : "0.1.1"
 }
 

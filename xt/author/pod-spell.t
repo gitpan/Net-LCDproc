@@ -15,14 +15,13 @@ Net
 LCDproc
 Widget
 Icon
+Meta
 String
 HBar
 Frame
 VBar
+Screen
 Error
 Scroller
-Screen
 Num
-Meta
-Attribute
 Title

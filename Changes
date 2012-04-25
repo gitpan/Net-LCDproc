@@ -1,214 +1,103 @@
-==================================================
-Changes from 2011-04-24 00:00:00 +0000 to present.
-==================================================
+Changelog for Net-LCDproc
 
-------------------------------------------
-version 0.1.0 at 2012-04-23 08:35:07 +0000
-------------------------------------------
+0.1.1 2012-04-25T07:13:42
+ [Ioan Rogers <ioan.rogers@gmail.com>]
+ - Not used debugging mods
 
-  Change: be4939dda32a5f1293d38b91dff3dac8e6dfe591
-  Author: Ioan Rogers <ioanr@cpan.org>
-  Date : 2012-04-23 01:35:02 +0000
+ - Added a basic media client to demo other widgets
 
-    Release 
+ - Made clock example multi-screen, and made iconname an enum
 
-  Change: 94cd78c0834f27410a5041a1be3bd1e7b1f53be2
-  Author: Ioan Rogers <ioanr@cpan.org>
-  Date : 2012-04-23 01:24:49 +0000
+ - Added the other widget types
 
-    Use plugin bundles for dzil:: git and github 
+ - Moved Net into main module, merged clock and logging examples
 
-  Change: 28d44070ac16a11b5a7a52343e3b32cce070941b
-  Author: Ioan Rogers <ioanr@cpan.org>
-  Date : 2012-04-23 01:03:02 +0000
+ - * perlcritic policy changes
+   * better pod::weaver config
+   * some tidying upo and fixing perl::critic complaints
 
-    Tidied with new perltidyrc 
+ - The protocol doc is gfdl 1.1. Got working basic tests
 
-  Change: 5e7e2562fcbf6f352d5e2fb765622b461b5d16b7
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-12 01:19:17 +0000
+ - Updated debian packaging
 
-    Not used debugging mods 
+ - Started on tests
 
-  Change: 8a331c0610bcd585ec0cefcad5f70121bc6ce544
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-11 08:55:38 +0000
+ - packaging copyright, unnecessary deps
 
-    Added a basic media client to demo other widgets 
+ - Generate a README, and package docs
 
-  Change: 02e3a4822d2b93cf4c3bbbf7b29451d8b5ec08aa
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-11 04:02:56 +0000
+ - Errgh, merged
 
-    Made clock example multi-screen, and made iconname an enum 
+ - Tidied, tweaked dzil
 
-  Change: 5a4bb5a5c278b023ab22360117b1ee1e58e07ea6
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-10 08:41:24 +0000
+ - More cleaning for dzil
 
-    Added the other widget types 
+ - Basic readme
 
-  Change: 80131b3640961401305adc2078d27aee5bfeb3ba
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-10 08:13:05 +0000
+ - debian packaging improvements, and removed boilerplate pod
 
-    Moved Net into main module, merged clock and logging examples 
+ - Changes to dzil
 
-  Change: 9f052bbac2b8b3a0615584ee33e017cf26bc3aaa
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-10 07:00:29 +0000
+ - Better dist.ini
 
-    * perlcritic policy changes * better pod::weaver config * some
-    tidying upo and fixing perl::critic complaints 
+ - Clean up
 
-  Change: 100882430069ac41500767172daebd49d7927f84
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-10 03:20:16 +0000
+ - * perltidy fixes
+   * add a newline to Net->send_cmd - recent lcdproc 0.5.4 broke things?
 
-    The protocol doc is gfdl 1.1. Got working basic tests 
+ - More dist::zilla changes
 
-  Change: 215341ef2f7fba52339fd62f5c354ca6b43f5f08
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-09 07:14:38 +0000
+ - Ignore dzil's .build dir
 
-    Updated debian packaging 
+ - * dzilla plugin changes
+   * added a perltidyrc and tidied
 
-  Change: fd2189b9c9bd08aa8cf2471c0f7566db42f3dbb0
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-09 07:13:08 +0000
+ - Removed unused file
 
-    Started on tests 
+ - * Missed from last commit
 
-  Change: 02c90a9f7f39d88a1b0de789a3e74f77f5c81d91
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-09 06:42:14 +0000
+ - * Moved pod doc to LCDproc.pm, using dzil plugin to generate readme
 
-    packaging copyright, unnecessary deps 
+ - Logging improvements, some tidying
 
-  Change: 57110b36171be3e0c9e473e85be0795a6842136f
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-09 06:37:26 +0000
+ - * An Error class, ready for better error handling
+   * Some documentation
+   * Bolierplate author/release tests
+   * Removed some uneeded Dzil plugins
+   * Simpler example
 
-    Generate a README, and package docs 
+ - Changed sleep time in hddtemp.pl, added debian packaging
 
-  Change: 54926a82db03ee9295ea5e360b84c44f49629209
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-09 06:17:37 +0000
+ - Initial import
+   Only Strings and Title widgets are supported
+   needs more error handling
 
-    Errgh, merged 
 
-  Change: edc1cd83574226911554f046c5930d03fda9c302
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2012-01-09 06:07:00 +0000
+ [Ioan Rogers <ioanr@cpan.org>]
+ - Tidied
 
-    Tidied, tweaked dzil 
+ - Hopefully sign tags
 
-  Change: 8c19c3e92ab7e4666b853fbff6a64e665507c7df
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-10-07 15:59:10 +0000
+ - Missed from last commit
 
-    More cleaning for dzil 
+ - * Auto-apply triggers to widgets
+   * add a NoState trait for the attrs that shouldn't have triggers
+   * remove defaults as there aren't any useful defaults
 
-  Change: 0b57a9be424cea10b656d353f16cc20f8e73425a
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-10-07 15:53:07 +0000
+ - Moved screen meta role
 
-    Basic readme 
+ - Determine widget type from package name
 
-  Change: d8a7369aa288a92f2c36b0b411a68354eb6360a3
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-10-07 15:50:08 +0000
+ - No tracker file
 
-    debian packaging improvements, and removed boilerplate pod 
+ - Support frames
 
-  Change: d01d52889f0b8116bc951ab687374833bfea91f5
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-10-06 16:16:40 +0000
+ - CPAN::Changes compat
 
-    Changes to dzil 
+ - Release
 
-  Change: 0750d620e872d7a8190cc20c8bf59cc77a8897e5
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-10-06 16:07:54 +0000
+ - Use plugin bundles for dzil:: git and github
 
-    Better dist.ini 
+ - Tidied with new perltidyrc
 
-  Change: 06ce47d8baeb89770119b81e41be155373ece812
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-09-07 12:38:44 +0000
 
-    Clean up 
-
-  Change: c00851d97dfa23096926a1535de3b40975d26098
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-29 01:53:30 +0000
-
-    * perltidy fixes * add a newline to Net->send_cmd - recent lcdproc
-    0.5.4 broke things? 
-
-  Change: f035b1a109e29431aad69832316d5d1549ca593c
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-28 06:02:20 +0000
-
-    More dist::zilla changes 
-
-  Change: 4a248921a19bb2fc35623f6cc25c223cdf6f4c1d
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-28 05:01:57 +0000
-
-    Ignore dzil's .build dir 
-
-  Change: 26274a19637e7512f90c20b33da5db9424b9fe74
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-28 04:12:25 +0000
-
-    * dzilla plugin changes * added a perltidyrc and tidied 
-
-  Change: 0a9b749dac5d6230c7e216ed781e7ebf080654f9
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-28 03:40:59 +0000
-
-    Removed unused file 
-
-  Change: 692df0f0c2558d57837f8db75a12f64ea88db566
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-28 03:34:01 +0000
-
-    * Missed from last commit 
-
-  Change: 16b43b047e55b974e3cef83ba9446d1b8351a7e2
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-28 03:32:49 +0000
-
-    * Moved pod doc to LCDproc.pm, using dzil plugin to generate readme 
-
-  Change: 5ed6b7cfc533370b0464a181d148da460b15dd49
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2011-04-28 00:07:40 +0000
-
-    Logging improvements, some tidying 
-
-  Change: d6ecc11eb02597d3739b220d41fdf6f0825fdcf2
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2010-08-08 18:17:37 +0000
-
-    * An Error class, ready for better error handling * Some
-    documentation * Bolierplate author/release tests * Removed some
-    uneeded Dzil plugins * Simpler example 
-
-  Change: dab50fac267a02a9b9ab7d30a56eb71a1e6ed83f
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2010-07-19 02:25:38 +0000
-
-    Changed sleep time in hddtemp.pl, added debian packaging 
-
-  Change: c1b45c1c4b588b281ed16b4da7e3687c065ee782
-  Author: Ioan Rogers <ioan.rogers@gmail.com>
-  Date : 2010-07-18 20:34:15 +0000
-
-    Initial import Only Strings and Title widgets are supported needs
-    more error handling 
-
-================
-End of releases.
-================

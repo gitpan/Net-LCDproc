@@ -1,12 +1,13 @@
 package Net::LCDproc::Widget;
 {
-    $Net::LCDproc::Widget::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::VERSION = '0.1.1';
 }
 
 #ABSTRACT: Base class for all the widgets
 
 use v5.10;
 use Moose;
+use Net::LCDproc::Meta::Widget;
 use Log::Any qw($log);
 use namespace::autoclean;
 
@@ -17,22 +18,33 @@ has id => (
 );
 
 has type => (
-    is  => 'ro',
-    isa => 'Str',
+    is      => 'ro',
+    isa     => 'Str',
+    traits  => ['NoState'],
+    default => sub {
+        my $pkg = shift->meta->{package};
+        my @parts = split /::/, $pkg;
+        return lc $parts[-1];
+    },
 );
 
-has frame => (
-    is  => 'ro',
-    isa => 'Net::LCDproc::Widget::Frame',
+has frame_id => (
+    is        => 'rw',
+    isa       => 'Str',
+    traits    => ['NoState'],
+    predicate => 'has_frame_id',
+
+    #isa => 'Net::LCDproc::Widget::Frame',
 );
 
 has screen => (
-    is  => 'rw',
-    isa => 'Net::LCDproc::Screen',
+    is     => 'rw',
+    isa    => 'Net::LCDproc::Screen',
+    traits => ['NoState'],
 );
 
 has is_new => (
-    traits   => ['Bool'],
+    traits   => [qw/Bool NoState/],
     is       => 'ro',
     isa      => 'Bool',
     default  => 1,
@@ -41,7 +53,7 @@ has is_new => (
 );
 
 has changed => (
-    traits  => ['Bool'],
+    traits  => [qw/Bool NoState/],
     is      => 'rw',
     isa     => 'Bool',
     handles => {
@@ -53,6 +65,7 @@ has changed => (
 has _set_cmd => (
     is       => 'rw',
     isa      => 'ArrayRef',
+    traits   => ['NoState'],
     required => 1,
     default  => sub { [] },
 );
@@ -126,8 +139,13 @@ sub _get_set_cmd_str {
 sub _create_widget_on_server {
     my $self = shift;
     $log->debugf('Adding new widget: %s - %s', $self->id, $self->type);
-    $self->screen->_lcdproc->_send_cmd(sprintf 'widget_add %s %s %s',
-        $self->screen->id, $self->id, $self->type);
+    my $add_str = sprintf 'widget_add %s %s %s',
+      $self->screen->id, $self->id, $self->type;
+
+    if ($self->has_frame_id) {
+        $add_str .= " -in " . $self->frame_id;
+    }
+    $self->screen->_lcdproc->_send_cmd($add_str);
 
     $self->added;
 
@@ -150,7 +168,7 @@ Net::LCDproc::Widget - Base class for all the widgets
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

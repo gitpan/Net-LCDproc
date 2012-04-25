@@ -1,6 +1,6 @@
 package Net::LCDproc::Widget::Num;
 {
-    $Net::LCDproc::Widget::Num::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::Num::VERSION = '0.1.1';
 }
 
 #ABSTRACT: 'num' widget
@@ -16,12 +16,7 @@ has ['x', 'int'] => (
     isa      => 'Int',
     required => 1,
     default  => 1,
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
-
-has '+type' => (default => 'num',);
 
 has '+_set_cmd' => (default => sub { [qw/ x int /] },);
 
@@ -39,7 +34,7 @@ Net::LCDproc::Widget::Num - 'num' widget
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

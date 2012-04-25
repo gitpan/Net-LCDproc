@@ -1,6 +1,6 @@
 package Net::LCDproc::Widget::Scroller;
 {
-    $Net::LCDproc::Widget::Scroller::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::Scroller::VERSION = '0.1.1';
 }
 
 #ABSTRACT: 'scroller' widget
@@ -26,23 +26,13 @@ has direction => (
     is       => 'rw',
     isa      => enum([qw/h v m/]),
     required => 1,
-    default  => 'h',
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
 
 has ['left', 'right', 'top', 'bottom', 'speed'] => (
     is       => 'rw',
     isa      => 'Int',
     required => 1,
-    default  => 0,
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
-
-has '+type' => (default => 'scroller',);
 
 has '+_set_cmd' =>
   (default => sub { [qw/ left top right bottom direction speed text /] },);
@@ -61,7 +51,7 @@ Net::LCDproc::Widget::Scroller - 'scroller' widget
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

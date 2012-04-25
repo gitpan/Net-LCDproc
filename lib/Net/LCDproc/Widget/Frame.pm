@@ -1,15 +1,31 @@
 package Net::LCDproc::Widget::Frame;
 {
-    $Net::LCDproc::Widget::Frame::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::Frame::VERSION = '0.1.1';
 }
 
-#ABSTRACT: The 'frame' widget, a screen within a screen
+#ABSTRACT: A frame, a screen within a screen
 
 use v5.10;
 use Moose;
 use Moose::Util::TypeConstraints;
 use namespace::autoclean;
 extends 'Net::LCDproc::Widget';
+
+has direction => (
+    is       => 'rw',
+    isa      => enum(['v', 'h']),
+    required => 1,
+);
+
+has ['left', 'right', 'top', 'bottom', 'width', 'height', 'speed'] => (
+    is       => 'rw',
+    isa      => 'Int',
+    required => 1,
+);
+
+has '+_set_cmd' =>
+  (default => sub { [qw/left top right bottom width height direction speed/] },
+  );
 
 __PACKAGE__->meta->make_immutable;
 
@@ -21,11 +37,34 @@ __END__
 
 =head1 NAME
 
-Net::LCDproc::Widget::Frame - The 'frame' widget, a screen within a screen
+Net::LCDproc::Widget::Frame - A frame, a screen within a screen
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
+
+=head1 ATTRIBUTES
+
+All atrributes are required
+
+=over
+
+=item direction
+
+C<h> or C<v> for horizontal or vertical scrolling, respectively. In practice,
+horizontal scrolling is marked as TODO in LCDproc.
+
+=item left, right, top, bottom
+
+Coordinates of the frame on the screen in chars
+
+=item width, height
+
+Frame dimension in chars
+
+=item speed
+
+Speed of scrolling, if needed
 
 =head1 SEE ALSO
 

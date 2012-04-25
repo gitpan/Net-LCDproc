@@ -14,12 +14,12 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-SHA1 d1c21f32d57fc2446c07120ba6a623fef18a9f11 Build.PL
-SHA1 d5572d7f28d799601f047b0e6dd260ae5580ea12 Changes
+SHA1 1c079d227f258a70ce6dc2bc9a8d1cf1df86fbee Build.PL
+SHA1 e9179c1b396ac57fed16d8110d263c5c2be3cf61 Changes
 SHA1 95ff3a0753ab661b08dad891782f6be539513ec3 LICENSE
-SHA1 c330e9ae1c7251d88d8c8da49bb5b336d438a080 MANIFEST
-SHA1 00a16599708ba0059ea82486f1c4b5bf95973804 META.json
-SHA1 949f7f1c34111a62cc78e113e11c7682977388be README.mkdn
+SHA1 b516c8671c916d5c30c68147aea3fd85949b9c5d MANIFEST
+SHA1 541a207c8f6976ab92f8e5d7853470efc04f7046 META.json
+SHA1 b235ee2abefe07bf45167207e79b5610b1b3e638 README.mkdn
 SHA1 401d2cf90d4e5702d18913fcda1c3850acc7bbfc debian/changelog
 SHA1 136571b41aa14adc10c5f3c987d43c02c8f5d498 debian/compat
 SHA1 1469226c2bfdaa5430b8fad9ea20b4d528512b9a debian/control
@@ -29,29 +29,30 @@ SHA1 c48e4cec568bc5eae32001929782db6aa367204f debian/libnet-lcdproc-perl.example
 SHA1 5f6760c832506a7214040149922eca574c218d4c debian/rules
 SHA1 f8738a6566306ae25f93456a019426af51ccc827 debian/source/format
 SHA1 f2d58f57aad0408f48b8d3aee1223c1968d00ef7 debian/watch
-SHA1 f190ca76f4cdffc7a519c4707ebb946827d6815b dist.ini
+SHA1 ebe18df9bc883983ac118aaa0b98caed04a22c3c dist.ini
 SHA1 001576ba78638d4c4ad6b55ba2a84479db591239 doc/lcdproc_protocol.pod
-SHA1 61058db273da0cf9de77f3d797a8792cca87ba62 eg/clock.pl
+SHA1 165a69589f5309b44f5214ede2d38da92a3c16a7 eg/clock.pl
 SHA1 f276006224ad65ffc7df6c7ef091ace8ee106e1b eg/errors.pl
 SHA1 b91401bbe937cbcacd4c77377ed14ae0af3bf003 eg/music.pl
-SHA1 f15b63cd46d4b314bd4247782c77f8df453dd8ec lib/Net/LCDproc.pm
-SHA1 5e9bf47f46b08b2790345f707baf406cb59982a9 lib/Net/LCDproc/Error.pm
-SHA1 0872d265d1cab2587091c3f5bf2c4bc2528e140e lib/Net/LCDproc/Meta/Attribute/LCDproc/Screen.pm
-SHA1 d0e662f9351a8ba32b21f741fc436714bef51e15 lib/Net/LCDproc/Screen.pm
-SHA1 5161ce76c3812f282db8eeafcd4cba107e654e3f lib/Net/LCDproc/Widget.pm
-SHA1 e18d5f4499c2a39195d885f6f4290c89972f9405 lib/Net/LCDproc/Widget/Frame.pm
-SHA1 8f330bd2f20b90daa4d5b936f37f88ce03d075cf lib/Net/LCDproc/Widget/HBar.pm
-SHA1 fe868876ee682f034e560bbc5b4965ca5e2589c0 lib/Net/LCDproc/Widget/Icon.pm
-SHA1 25dcf07cc47e97014d9d71fbbf90d1ccd46cf099 lib/Net/LCDproc/Widget/Num.pm
-SHA1 d4c0496785ad7176d024a0a1f6cf9e9d620fcaef lib/Net/LCDproc/Widget/Scroller.pm
-SHA1 214391b26f85cd1b1ddd32839653ed9c914379ba lib/Net/LCDproc/Widget/String.pm
-SHA1 91071411c40796ad780af6ad1d6daa88c885a774 lib/Net/LCDproc/Widget/Title.pm
-SHA1 ebed89025f15d0afab050ac64948b137760f974b lib/Net/LCDproc/Widget/VBar.pm
+SHA1 e5909d23e58dc496ec4eb6dca23d94faa955580b lib/Net/LCDproc.pm
+SHA1 04df77c6b508c62cbcadd5ba1faee44f0f62f765 lib/Net/LCDproc/Error.pm
+SHA1 d2444d2eb24198e789c7990cba33da4ef585e365 lib/Net/LCDproc/Meta/Screen.pm
+SHA1 f4d454c51aa281f8bf49d03f3f5aede178acdf93 lib/Net/LCDproc/Meta/Widget.pm
+SHA1 d8683283c8f970b695bbf20338a34859b555cd8f lib/Net/LCDproc/Screen.pm
+SHA1 ca49b3393e7c1a77b249e275002ade091038e6c8 lib/Net/LCDproc/Widget.pm
+SHA1 00832df264f5f38f2d7ad9754704995297c5403f lib/Net/LCDproc/Widget/Frame.pm
+SHA1 e532e55ab345f24f0b1c69239c7b6a9399f16baf lib/Net/LCDproc/Widget/HBar.pm
+SHA1 24e3412fd9ca2eeab3b3a70cbd8a1390ae6452cb lib/Net/LCDproc/Widget/Icon.pm
+SHA1 05841378222518d0a63bb0806e78f105c6e4e771 lib/Net/LCDproc/Widget/Num.pm
+SHA1 c7ec7d0d13f8e77d1532388cef6bb8dcf092d5a2 lib/Net/LCDproc/Widget/Scroller.pm
+SHA1 968d94954ffa8c66eb32e2e5bb8d383c537db04c lib/Net/LCDproc/Widget/String.pm
+SHA1 4c14ec85e5fde356296fcc4b691f7ce21da56c8a lib/Net/LCDproc/Widget/Title.pm
+SHA1 0e7d85314624aafba965be0246c5306fd8f7e9d5 lib/Net/LCDproc/Widget/VBar.pm
 SHA1 2305c191be2b48f7bca782539c249aeb5f46b53a t/00-compile.t
 SHA1 55f55c9a4c4112104b8af9e5f65ca6b7dbc3b9db t/1_widgets.t
 SHA1 d213bcb363bf556a0e769a407bd819740a186885 weaver.ini
 SHA1 c1221a493fb516aed6b55b9321e3acd168ce81ef xt/author/critic.t
-SHA1 749c0d1c9962191b738e9c3c98d63c89b921fbea xt/author/pod-spell.t
+SHA1 b63c29484b6b6cb0cd0ca50a9bed08c3abbfa8c0 xt/author/pod-spell.t
 SHA1 e3094e32340a9a0dcb90d91b77d66e61cbf7fa14 xt/perlcriticrc
 SHA1 98143fd89a26270feb9c17990090134e102b6a76 xt/perltidyrc
 SHA1 28ef20a73b7cf9b85585e2b7db6fc80424289134 xt/release/cpan-changes.t
@@ -64,17 +65,17 @@ SHA1 9934d36e45e1143c1a54658bc48872e0591af41b xt/release/pod-syntax.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQIcBAEBCgAGBQJPlRRBAAoJEOpmRc2kYGBPqPwP/08oF0rEuuvcnQF9amS9La/m
-tHRl/vTiUtfrj0YxppsTQ23zUYKsizS6w8XxUNfux6P6p1B1Sw+oktXlOvrK7kg9
-Af0xXcSa0hhePk7I0/u/MB5lVGd4f8QFIwbJYa8afBtvwZcvTtRhptoUFrTDe2md
-CZrcchljMizMfMRlMSwI/V7KDF5penZFi9dO9MvdLbmbzFrN3+uariK7MvVc1dNK
-ArcsA8mEF4kPASCsQljhRxZ1ZWn85PBgQkEw2NerNTlvlR79MjPgbV0hPD8ur9bI
-atW7z5NnmphBm7xfnn6nyhdsRAeQhfyTpCS98zCDm9amM5rElOJCV17ryzMxoKwa
-zUn+3oXAjh3D+gO+z7n2El50mslp15YQdPO3aW73oej1K6Ik2HbHU5D26AAUH1QW
-g4gmsKVmgO5ZU3F8gh6qbCvxM2uo4Og+TDWnwyQvgRa/jP/Cfecml6hYiyu52hdK
-yBTb+Hi9jJ2KSvdyeo0SWsxw2T3uwEHIf3+3hD6xKOroXHNeTq/xj0WRGLBh6U8K
-j4FP7M0fH160CEFoMGPJWLeC49tcke6g/+Dg5Ph4Q/AHQggUKl0mDNQzMxZMls9L
-/tfdG4QQakBMw4E0Eam+CCduAj70YFZ6/8+iydGtq/fNIzsywTbSUUCcs7nAW9TW
-BQv4QQLVZcx6B+CDwzOc
-=CV9G
+iQIcBAEBCgAGBQJPl6QtAAoJEOpmRc2kYGBPGQsP/31UDuV2GcU79cYgQehtSs+N
+tbLK7HIg0y8rAswCxX8sXiPBbRh+n6fYNGOgYALVe3/wXBoFNSd96riLWUZ1A5vv
+g3WUTymPB5f6i+X3HCYdrurXmfgOWVu66WeIh+kbdzOkmcs6eCpwxmVTclobTtJl
+pbJABF65JOvUuw1g8fUFSFGyUt6uognKkNQJLLvEglbbfMwcclVdD1gnST14N0In
+2fw8xcXuBJVM9qmnz/RbSJgydM5Eop4go6a+iq1isM8+HN/7HPvkR9OLEkZ3NDDz
+5dFtR9hJtiexUMPPtn4E14sXlsK4XSqGs/7Ivw9iTaUDclA1Cjf+ZFhH3ycumTyt
+jLUEtUaj/JzDX6U7ePkXfMEAYS2I58eaKkGvZ9gQlF1KAIA/ksHqJPRVJ8CbIS1e
+UIP1nCWAE8Y/Tzae8DmAGBNDqIFh1p2LLcJbuIYlPtbvGkDjEQBGNYMQRQW+lRtW
+lijf3PkUg/5WmJU8FJDtjGEco0smYpeaf5IdJXF4xn8pmBqoPNaD4stlFHkjLTKQ
+ShJ7yCfMRT/egfx6Dy0OhZ7n9dc0WqgzuSMsE5OJj5q8wSf0QlEyfFoia7aZ9oig
+xyCt26mUf3XmKTLzekKV2jkoC2V++W1pBvNLljjepBc+voy+DiZWmiBkHw5USp84
+J/I1mQKRd/uUBk7zG1gt
+=zi0e
 -----END PGP SIGNATURE-----

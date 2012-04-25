@@ -1,6 +1,6 @@
 package Net::LCDproc;
 {
-    $Net::LCDproc::VERSION = '0.1.0';
+    $Net::LCDproc::VERSION = '0.1.1';
 }
 
 #ABSTRACT: Client library to interact with L<LCDproc|http://lcdproc.sourceforge.net/>
@@ -257,7 +257,7 @@ Net::LCDproc - Client library to interact with L<LCDproc|http://lcdproc.sourcefo
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SYNOPSIS
 

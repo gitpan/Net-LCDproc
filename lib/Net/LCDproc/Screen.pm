@@ -1,6 +1,6 @@
 package Net::LCDproc::Screen;
 {
-    $Net::LCDproc::Screen::VERSION = '0.1.0';
+    $Net::LCDproc::Screen::VERSION = '0.1.1';
 }
 
 #ABSTRACT: represents an LCDproc screen
@@ -11,7 +11,7 @@ use Moose::Util::TypeConstraints;
 use Log::Any qw($log);
 use namespace::autoclean;
 
-with 'Net::LCDproc::Meta::Attribute::LCDproc::Screen';
+with 'Net::LCDproc::Meta::Screen';
 
 has id => (
     is       => 'ro',
@@ -208,7 +208,7 @@ Net::LCDproc::Screen - represents an LCDproc screen
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 

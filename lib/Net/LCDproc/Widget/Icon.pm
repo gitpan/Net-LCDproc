@@ -1,6 +1,6 @@
 package Net::LCDproc::Widget::Icon;
 {
-    $Net::LCDproc::Widget::Icon::VERSION = '0.1.0';
+    $Net::LCDproc::Widget::Icon::VERSION = '0.1.1';
 }
 
 #ABSTRACT: 'icon' widget
@@ -43,23 +43,13 @@ has iconname => (
         ]
     ),
     required => 1,
-    default  => 'NULL',
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
 
 has ['x', 'y'] => (
     is       => 'rw',
     isa      => 'Int',
     required => 1,
-    default  => 1,
-    trigger  => sub {
-        $_[0]->has_changed;
-    },
 );
-
-has '+type' => (default => 'icon',);
 
 has '+_set_cmd' => (default => sub { [qw/ x y iconname /] },);
 
@@ -77,7 +67,7 @@ Net::LCDproc::Widget::Icon - 'icon' widget
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SEE ALSO
 
