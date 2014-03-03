@@ -1,20 +1,30 @@
 package Net::LCDproc;
-{
-    $Net::LCDproc::VERSION = '0.1.1';
-}
-
+$Net::LCDproc::VERSION = '0.1.2';
 #ABSTRACT: Client library to interact with L<LCDproc|http://lcdproc.sourceforge.net/>
 
-use v5.10;
-use Moose;
+use v5.10.2;
+use Moo;
+
 use Net::LCDproc::Error;
+use Net::LCDproc::Screen;
+use Net::LCDproc::Widget::HBar;
+use Net::LCDproc::Widget::Icon;
+use Net::LCDproc::Widget::Num;
+use Net::LCDproc::Widget::Scroller;
+use Net::LCDproc::Widget::String;
+use Net::LCDproc::Widget::Title;
+use Net::LCDproc::Widget::VBar;
+
 use Log::Any qw($log);
 use IO::Socket::INET;
-use Readonly;
-use namespace::autoclean;
+use Const::Fast;
+use Types::Standard qw/ArrayRef HashRef InstanceOf Int Str/;
+use namespace::sweep;
 
-Readonly my $PROTOCOL_VERSION => 0.3;
-Readonly my $MAX_DATA_READ    => 4096;
+no if $] >= 5.018, 'warnings', 'experimental::smartmatch';
+
+const my $PROTOCOL_VERSION => 0.3;
+const my $MAX_DATA_READ    => 4096;
 
 sub BUILD {
     my $self = shift;
@@ -33,52 +43,45 @@ sub DEMOLISH {
 
 has server => (
     is            => 'ro',
-    isa           => 'Str',
-    required      => 1,
+    isa           => Str,
     default       => 'localhost',
     documentation => 'Hostname or IP address of LCDproc server',
 );
 
 has port => (
     is            => 'ro',
-    isa           => 'Int',
-    required      => 1,
+    isa           => Int,
     default       => 13666,
     documentation => 'Port the LCDproc server is listening on',
 );
 
 has ['width', 'height'] => (
     is            => 'rw',
-    isa           => 'Int',
+    isa           => Int,
     documentation => 'Dimensions of the display in cells',
 );
 
 has ['cell_width', 'cell_height'] => (
     is            => 'rw',
-    isa           => 'Int',
+    isa           => Int,
     documentation => 'Dimensions of a cell in pixels',
 );
 
 has screens => (
     is            => 'rw',
-    traits        => ['Array'],
-    isa           => 'ArrayRef[Net::LCDproc::Screen]',
+    isa           => ArrayRef [InstanceOf ['Net::LCDproc::Screen']],
     documentation => 'Array of active screens',
-    default       => sub { [] },
-    lazy          => 1,
-    handles       => {push_screen => 'push',},
+    default => sub { [] },
 );
 
 has socket => (
-    is       => 'ro',
-    isa      => 'IO::Socket::INET',
-    builder  => '_build_socket',
-    required => 1,
+    is  => 'lazy',
+    isa => InstanceOf ['IO::Socket::INET'],
 );
 
 has responses => (
     is       => 'ro',
-    isa      => 'HashRef',
+    isa      => HashRef,
     required => 1,
     default  => sub {
         return {
@@ -166,13 +169,13 @@ sub _handle_response {
         when (/error/) {
             $log->error('ERROR: ' . $args[0]);
             return;
-        };
+        }
         when (/connect/) {
             return \@args;
         }
         when (/success/) {
             return 1;
-        };
+        }
         default {
 
             # don't care about listen or ignore
@@ -180,8 +183,8 @@ sub _handle_response {
             # FIXME: start caring! Then only update the server when
             # it is actually listening
             return $self->_handle_response;
-        };
-    };
+        }
+    }
 
 }
 
@@ -214,7 +217,7 @@ sub _send_hello {
 sub add_screen {
     my ($self, $screen) = @_;
     $screen->_lcdproc($self);
-    $self->push_screen($screen);
+    push @{$self->screens}, $screen;
     return 1;
 }
 
@@ -238,12 +241,10 @@ sub remove_screen {
 sub update {
     my $self = shift;
     foreach my $s (@{$self->screens}) {
-        $s->update();
+        $s->update;
     }
     return 1;
 }
-
-__PACKAGE__->meta->make_immutable;
 
 1;
 
@@ -251,33 +252,39 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
+=for :stopwords Ioan Rogers
+
 =head1 NAME
 
 Net::LCDproc - Client library to interact with L<LCDproc|http://lcdproc.sourceforge.net/>
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
 =head1 SYNOPSIS
 
-  $lcdproc = Net::LCDproc->new;
-  $screen = Net::LCDproc::Screen->new( id => "main" );
+  use Net::LCDproc; # this loads all the mods under Net::LCDproc::*
 
-  my $title = Net::LCDproc::Widget::Title->new( id => "title" );
+  my $lcdproc = Net::LCDproc->new;
+  my $screen = Net::LCDproc::Screen->new(id => 'main');
+
+  my $title = Net::LCDproc::Widget::Title->new(id => 'title');
   $title->text('My Screen Title');
   $lcdproc->add_screen($screen);
 
-  $screen->set( 'name',      "Test Screen" );
-  $screen->set( 'heartbeat', "off" );
+  $screen->set('name',      'Test Screen');
+  $screen->set('heartbeat', 'off');
 
   $screen->add_widget($title);
 
   my $wdgt = Net::LCDproc::Widget::String->new(
-      id   => "wdgt",
+      id   => 'wdgt',
       x    => 1,
       y    => 2,
-      text => "Some Text",
+      text => 'Some Text',
   );
 
   $screen->add_widget($wdgt);
@@ -290,20 +297,20 @@ version 0.1.1
 
 =head1 SEE ALSO
 
-Please see those modules/websites for more information related to this module.
-
-=over 4
-
-=item *
-
 L<LCDproc|http://lcdproc.sourceforge.net/>
-
-=back
 
 =head1 BUGS AND LIMITATIONS
 
 You can make new bug reports, and view existing ones, through the
 web interface at L<https://github.com/ioanrogers/Net-LCDproc/issues>.
+
+=head1 AVAILABILITY
+
+The project homepage is L<http://metacpan.org/release/Net-LCDproc/>.
+
+The latest version of this module is available from the Comprehensive Perl
+Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
+site near you, or see L<https://metacpan.org/module/Net::LCDproc/>.
 
 =head1 SOURCE
 
@@ -316,10 +323,33 @@ Ioan Rogers <ioanr@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2012 by Ioan Rogers.
+This software is Copyright (c) 2014 by Ioan Rogers.
 
 This is free software, licensed under:
 
   The GNU General Public License, Version 3, June 2007
+
+=head1 DISCLAIMER OF WARRANTY
+
+BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
+WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+SOFTWARE IS WITH YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME
+THE COST OF ALL NECESSARY SERVICING, REPAIR, OR CORRECTION.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE LIABLE
+TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
 
 =cut

@@ -1,99 +1,64 @@
 package Net::LCDproc::Screen;
-{
-    $Net::LCDproc::Screen::VERSION = '0.1.1';
-}
-
+$Net::LCDproc::Screen::VERSION = '0.1.2';
 #ABSTRACT: represents an LCDproc screen
 
-use v5.10;
-use Moose;
-use Moose::Util::TypeConstraints;
+use v5.10.2;
+use Moo;
+use Types::Standard qw/ArrayRef Bool Enum HashRef InstanceOf Int Str/;
 use Log::Any qw($log);
-use namespace::autoclean;
+use namespace::sweep;
 
-with 'Net::LCDproc::Meta::Screen';
+has id => (is => 'ro', isa => Str, required => 1);
 
-has id => (
-    is       => 'ro',
-    isa      => 'Str',
-    required => 1,
-);
+has name => (is => 'rwp', isa => Str);
 
-has name => (
-    traits  => ['LCDprocScreen'],
-    is      => 'ro',
-    isa     => 'Str',
-    changed => 0,
-    cmd_str => '-name',
-);
-
-has ['width', 'height' . 'duration', 'timeout', 'cursor_x', 'cursor_y'] => (
-    traits  => ['LCDprocScreen'],
-    is      => 'ro',
-    isa     => 'Int',
-    changed => 0,
+has [qw/width height duration timeout cursor_x cursor_y/] => (
+    is  => 'rwp',
+    isa => Int,
 );
 
 has priority => (
-    traits  => ['LCDprocScreen'],
-    is      => 'ro',
-    isa     => enum([qw[hidden background info foreground alert input]]),
-    changed => 0,
+    is  => 'rwp',
+    isa => Enum([qw[hidden background info foreground alert input]]),
 );
 
 has heartbeat => (
-    traits  => ['LCDprocScreen'],
-    is      => 'ro',
-    isa     => enum([qw[on off open]]),
-    changed => 0,
-    cmd_str => '-heartbeat',
+    is  => 'rwp',
+    isa => Enum([qw[on off open]]),
 );
 
 has backlight => (
-    traits  => ['LCDprocScreen'],
-    is      => 'ro',
-    isa     => enum([qw[on off open toggle blink flash ]]),
-    changed => 0,
+    is  => 'rwp',
+    isa => Enum([qw[on off open toggle blink flash ]]),
 );
 
 has cursor => (
-    traits  => ['LCDprocScreen'],
-    is      => 'ro',
-    isa     => enum([qw[on off under block]]),
-    changed => 0,
+    is  => 'rwp',
+    isa => Enum([qw[on off under block]]),
 );
 
 has widgets => (
-    is      => 'rw',
-    isa     => 'ArrayRef[Net::LCDproc::Widget]',
-    default => sub { [] },
-    lazy    => 1,
-);
-
-has is_new => (
-    traits   => ['Bool'],
-    is       => 'ro',
-    isa      => 'Bool',
-    default  => 1,
-    required => 1,
-    handles  => {added => 'unset',},
-);
-
-has _lcdproc => (
     is  => 'rw',
-    isa => 'Net::LCDproc',
+    isa => ArrayRef [InstanceOf ['Net::LCDproc::Widget']],
+    default => sub { [] },
 );
 
-### Public Methods
-sub set {
-    my ($self, $attr_name, $new_val) = @_;
+has is_new => (is => 'rw', isa => Bool, default  => 1);
 
-    if ($log->is_debug) {
-        $log->debugf('Setting %s: [%s]', $attr_name, $new_val);
-    }
-    my $attr = $self->meta->get_attribute($attr_name);
-    $attr->set_value($self, $new_val);
-    $attr->is_changed;
+has _lcdproc => (is => 'rw', isa => InstanceOf['Net::LCDproc']);
+
+has _state => (is => 'ro', isa => HashRef, default => sub {{}});
+
+
+sub set {
+    my ($self, $attr, $val) = @_;
+
+    # set the attribute
+    my $setter = "_set_$attr";
+    $self->$setter($val);
+
+    # and record it is dirty
+    $self->_state->{$attr} = 1;
     return 1;
 }
 
@@ -106,24 +71,19 @@ sub update {
         # screen needs to be added
         if ($log->is_debug) { $log->debug('Adding ' . $self->id) }
         $self->_lcdproc->_send_cmd('screen_add ' . $self->id);
-        $self->added;
+        $self->is_new(0);
     }
 
     # even if the screen was new, we leave defaults up to the LCDproc server
     # so nothing *has* to be set
-    my $changes = $self->_list_changes;
 
-    if ($changes) {
-        if ($log->is_debug) { $log->debug('Updating screen: ' . $self->id) }
-        foreach my $attr_name (@{$changes}) {
+    foreach my $attr (keys %{$self->_state}) {
+        $log->debug('Updating screen: ' . $self->id) if $log->is_debug;
 
-            my $cmd_str = $self->_get_cmd_str_for($attr_name);
+        my $cmd_str = $self->_get_cmd_str_for($attr);
 
-            $self->_lcdproc->_send_cmd($cmd_str);
-
-            my $attr = $self->meta->get_attribute($attr_name);
-            $attr->change_updated;
-        }
+        $self->_lcdproc->_send_cmd($cmd_str);
+        delete $self->_state->{$attr};
     }
 
     # now check the the widgets attached to this screen
@@ -156,45 +116,13 @@ sub remove {
 ### Private Methods
 
 sub _get_cmd_str_for {
-    my ($self, $attr_name) = @_;
+    my ($self, $attr) = @_;
 
     my $cmd_str = 'screen_set ' . $self->id;
 
-    my $attr = $self->meta->get_attribute($attr_name);
-    if (   $attr->does('Net::LCDproc::Meta::Attribute::Trait')
-        && $attr->has_cmd_str)
-    {
-        $cmd_str .= sprintf ' %s "%s"', $attr->cmd_str,
-          $attr->get_value($self);
-        return $cmd_str;
-    }
-
-    return;
-
+    $cmd_str .= sprintf ' %s "%s"', $attr, $self->$attr;
+    return $cmd_str;
 }
-
-sub _list_changes {
-    my $self = shift;
-
-    my @changes;
-
-    foreach my $attr_name ($self->meta->get_attribute_list) {
-        my $attr = $self->meta->get_attribute($attr_name);
-        if (   $attr->does('Net::LCDproc::Meta::Attribute::Trait')
-            && $attr->changed)
-        {
-            if ($attr->changed) {
-                push @changes, $attr_name;
-            }
-        }
-    }
-    if (scalar @changes == 0) {
-        return;
-    }
-    return \@changes;
-}
-
-__PACKAGE__->meta->make_immutable;
 
 1;
 
@@ -202,30 +130,36 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
+=for :stopwords Ioan Rogers
+
 =head1 NAME
 
 Net::LCDproc::Screen - represents an LCDproc screen
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
-=head1 SEE ALSO
+=head1 METHODS
 
-Please see those modules/websites for more information related to this module.
+=head2 C<set($attr, $val)>
 
-=over 4
-
-=item *
-
-L<Net::LCDproc|Net::LCDproc>
-
-=back
+Assign a new value to a screen attribute.
 
 =head1 BUGS AND LIMITATIONS
 
 You can make new bug reports, and view existing ones, through the
 web interface at L<https://github.com/ioanrogers/Net-LCDproc/issues>.
+
+=head1 AVAILABILITY
+
+The project homepage is L<http://metacpan.org/release/Net-LCDproc/>.
+
+The latest version of this module is available from the Comprehensive Perl
+Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
+site near you, or see L<https://metacpan.org/module/Net::LCDproc/>.
 
 =head1 SOURCE
 
@@ -238,10 +172,33 @@ Ioan Rogers <ioanr@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2012 by Ioan Rogers.
+This software is Copyright (c) 2014 by Ioan Rogers.
 
 This is free software, licensed under:
 
   The GNU General Public License, Version 3, June 2007
+
+=head1 DISCLAIMER OF WARRANTY
+
+BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
+WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+SOFTWARE IS WITH YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME
+THE COST OF ALL NECESSARY SERVICING, REPAIR, OR CORRECTION.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE LIABLE
+TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
 
 =cut

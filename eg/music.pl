@@ -1,6 +1,6 @@
-#!env perl
+#!/usr/bin/env perl
 
-use v5.10;
+use v5.10.2;
 use strict;
 use warnings;
 use Net::DBus;
@@ -9,12 +9,8 @@ use Net::DBus::Dumper;
 use Log::Any::Adapter;
 use Log::Dispatch;
 use Net::LCDproc;
-use Net::LCDproc::Screen;
-use Net::LCDproc::Widget::Title;
-use Net::LCDproc::Widget::String;
-use Net::LCDproc::Widget::Icon;
-use Net::LCDproc::Widget::Scroller;
-use Net::LCDproc::Widget::HBar;
+
+no if $] >= 5.018, 'warnings', 'experimental::smartmatch';
 
 my $log;
 my $mediaplayer;
@@ -108,7 +104,8 @@ sub calc_bar_length {
 
 sub setup_screen {
 
-    $lcdproc = Net::LCDproc->new;
+    my $server = shift @ARGV || 'localhost';
+    $lcdproc = Net::LCDproc->new(server => $server);
     $screen = Net::LCDproc::Screen->new(id => 'mediaplayer');
     $lcdproc->add_screen($screen);
 
@@ -167,15 +164,15 @@ sub update_status {
     given ($playbackstatus) {
         when ('Stopped') {
             $widget->{artist_album}->text('Nothing playing');
-        };
+        }
         when ('Paused') {
 
             # icon
-        };
+        }
         default {
             my $length = calc_bar_length($metadata);
             $widget->{progress}->length($length);
-        };
+        }
     }
 
     if ($changed) {
