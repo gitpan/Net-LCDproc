@@ -1,5 +1,5 @@
 package Net::LCDproc::Widget::Frame;
-$Net::LCDproc::Widget::Frame::VERSION = '0.1.2';
+$Net::LCDproc::Widget::Frame::VERSION = '0.1.3';
 #ABSTRACT: A frame, a screen within a screen
 
 use v5.10.2;
@@ -42,7 +42,7 @@ Net::LCDproc::Widget::Frame - A frame, a screen within a screen
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 ATTRIBUTES
 

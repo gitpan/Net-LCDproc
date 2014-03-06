@@ -1,5 +1,5 @@
 package Net::LCDproc::Widget::HBar;
-$Net::LCDproc::Widget::HBar::VERSION = '0.1.2';
+$Net::LCDproc::Widget::HBar::VERSION = '0.1.3';
 #ABSTRACT: draw a horizontal bar
 
 use v5.10.2;
@@ -35,7 +35,7 @@ Net::LCDproc::Widget::HBar - draw a horizontal bar
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 BUGS AND LIMITATIONS
 

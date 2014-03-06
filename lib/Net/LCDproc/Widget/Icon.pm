@@ -1,5 +1,5 @@
 package Net::LCDproc::Widget::Icon;
-$Net::LCDproc::Widget::Icon::VERSION = '0.1.2';
+$Net::LCDproc::Widget::Icon::VERSION = '0.1.3';
 #ABSTRACT: 'icon' widget
 
 use v5.10.2;
@@ -69,7 +69,7 @@ Net::LCDproc::Widget::Icon - 'icon' widget
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 BUGS AND LIMITATIONS
 

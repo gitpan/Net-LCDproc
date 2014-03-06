@@ -1,5 +1,5 @@
 package Net::LCDproc::Role::Widget;
-$Net::LCDproc::Role::Widget::VERSION = '0.1.2';
+$Net::LCDproc::Role::Widget::VERSION = '0.1.3';
 use Moo::Role;
 
 sub _set_attr {
@@ -23,7 +23,7 @@ Net::LCDproc::Role::Widget
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 BUGS AND LIMITATIONS
 

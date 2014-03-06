@@ -62,7 +62,7 @@ my $static_prereqs = do { my $x = {
                                       'Data::Dumper' => '0',
                                       'IO::Socket::INET' => '0',
                                       'Log::Any' => '0',
-                                      'Moo' => '0',
+                                      'Moo' => '1.001000',
                                       'Moo::Role' => '0',
                                       'Throwable::Error' => '0',
                                       'Types::Standard' => '0',

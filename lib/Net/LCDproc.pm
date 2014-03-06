@@ -1,9 +1,9 @@
 package Net::LCDproc;
-$Net::LCDproc::VERSION = '0.1.2';
+$Net::LCDproc::VERSION = '0.1.3';
 #ABSTRACT: Client library to interact with L<LCDproc|http://lcdproc.sourceforge.net/>
 
 use v5.10.2;
-use Moo;
+use Moo 1.001000;
 
 use Net::LCDproc::Error;
 use Net::LCDproc::Screen;
@@ -262,7 +262,7 @@ Net::LCDproc - Client library to interact with L<LCDproc|http://lcdproc.sourcefo
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 SYNOPSIS
 

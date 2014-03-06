@@ -1,5 +1,5 @@
 package Net::LCDproc::Widget;
-$Net::LCDproc::Widget::VERSION = '0.1.2';
+$Net::LCDproc::Widget::VERSION = '0.1.3';
 #ABSTRACT: Base class for all the widgets
 
 use v5.10.2;
@@ -137,7 +137,7 @@ Net::LCDproc::Widget - Base class for all the widgets
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 BUGS AND LIMITATIONS
 

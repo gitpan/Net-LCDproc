@@ -1,5 +1,5 @@
 package Net::LCDproc::Widget::Scroller;
-$Net::LCDproc::Widget::Scroller::VERSION = '0.1.2';
+$Net::LCDproc::Widget::Scroller::VERSION = '0.1.3';
 #ABSTRACT: 'scroller' widget
 
 use v5.10.2;
@@ -50,7 +50,7 @@ Net::LCDproc::Widget::Scroller - 'scroller' widget
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 BUGS AND LIMITATIONS
 

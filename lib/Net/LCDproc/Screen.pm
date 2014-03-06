@@ -1,5 +1,5 @@
 package Net::LCDproc::Screen;
-$Net::LCDproc::Screen::VERSION = '0.1.2';
+$Net::LCDproc::Screen::VERSION = '0.1.3';
 #ABSTRACT: represents an LCDproc screen
 
 use v5.10.2;
@@ -140,7 +140,7 @@ Net::LCDproc::Screen - represents an LCDproc screen
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 METHODS
 
